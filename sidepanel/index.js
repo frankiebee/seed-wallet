@@ -1,3 +1,8 @@
+/**
+ * This file is the root file where the app and it's listeners are
+ * setup and mounted to the dom
+ *
+ * */
 const choo = require('choo')
 const html = require('choo/html')
 const initialize = require('./scripts/initialize')

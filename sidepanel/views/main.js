@@ -1,3 +1,8 @@
+/**
+ * This file is the setup for the "main view"
+ *
+ * */
+
 const html = require('choo/html')
 
 const subSelctor = require('../components/sub-selector')
@@ -21,7 +26,7 @@ module.exports = function main (state, emit) {
   const selectedContext = state.main.selected || defaultSelction
   const views = {
     Wallet: accountView,
-    Personal: personalView,
+    Chat: personalView,
     Settings: settingsView,
   }
 
