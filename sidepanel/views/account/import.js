@@ -32,11 +32,17 @@ module.exports = function importView (state, emit) {
           network: form.network.value,
         }
         emit('account#import', data)
-
-        debugger
     }
   }
+
+  const error = () => {
+    return html`
+      <div class="error">ERROR: ${state.error.message}</div>
+    `
+  }
+
   return html`
+    ${state.error ? error() : ''}
     <form class="column center-spaceAround" onsubmit=${onsubmit}>
       <div class="left-icon" onclick=${() => {emit('overlay#done')}}>←</div>
       <textarea name="secret" rows="4" cols="30" placeholder="private key or seed phrase" onkeypress=${keypress}></textarea>

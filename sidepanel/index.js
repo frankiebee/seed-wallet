@@ -6,6 +6,7 @@
 const choo = require('choo')
 const html = require('choo/html')
 const initialize = require('./scripts/initialize')
+const createAccountFromInput = require('./scripts/wallets/eth')
 const main = require('./views/main')
 
 const app = choo()
@@ -31,7 +32,17 @@ app.use((state, emitter) => {
     emitter.emit('render')
   })
   emitter.on('account#import', (data) => {
-
+    try {
+      if (data.network === 'Ethereum') {
+        createAccountFromInput(data.secret)
+        emitter.emit('overlay#done')
+      } else {
+        throw new Error('unrecognized network')
+      }
+    } catch (e) {
+      state.error = e
+      emitter.emit('render')
+    }
   })
 })
 
