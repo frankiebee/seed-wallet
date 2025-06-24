@@ -6,7 +6,7 @@
 const choo = require('choo')
 const html = require('choo/html')
 const initialize = require('./scripts/initialize')
-const createAccountFromInput = require('./scripts/wallets/eth')
+const { createAccountSigners } = require('./scripts/wallets')
 const main = require('./views/main')
 
 const app = choo()
@@ -14,6 +14,7 @@ const app = choo()
 app.route('/sidepanel.html', main)
 
 app.use((state, emitter) => {
+  const user = {}
   state.loading = true
   initialize(state).then(() => {
     state.loading = false
@@ -34,7 +35,7 @@ app.use((state, emitter) => {
   emitter.on('account#import', (data) => {
     try {
       if (data.network === 'Ethereum') {
-        createAccountFromInput(data.secret)
+        createAccount(data)
         emitter.emit('overlay#done')
       } else {
         throw new Error('unrecognized network')

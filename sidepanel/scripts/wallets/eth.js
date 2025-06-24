@@ -1,12 +1,25 @@
 const { Wallet, isHexString } = require('ethers')
 
+
+module.exports = {
+  createAccount,
+  createEthAccountFromInput,
+}
+
+function createAccount (chainId) {
+  const key = Wallet.createRandom()
+  key.chainId = chainId
+  return key
+}
+
+
 /**
  * Creates an Ethereum wallet from either a mnemonic or a private key.
  * @param {string} input - Mnemonic phrase or private key
  * @returns {Wallet}
  */
 
-module.exports = function createEthAccountFromInput(input) {
+function createEthAccountFromInput(input) {
   input = input.trim()
 
   if (input.split(' ').length >= 12 && input.includes(' ')) {

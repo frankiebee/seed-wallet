@@ -1,7 +1,6 @@
-const ethers = require('ethers')
-
 const { shortHands } = require('./browser')
 const db = shortHands.db
+const { createWalletWithSigners } = require('./wallets')
 
 
 function createWallet () {
